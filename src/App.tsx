@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import logo from './logo.svg'
+import './App.css'
+import ExpenseItem from './components/ExpenseItem'
+import LectureHistory from './components/LectureHistory'
 
 function App() {
+  const expense = [
+    {
+      id: 1,
+      title: 'Toilet Paper',
+      amount: 294.67,
+      date: new Date(2021, 2, 28),
+    },
+    {
+      id: 2,
+      title: 'Car Insurance',
+      amount: 294.67,
+      date: new Date(2021, 2, 28),
+    },
+    {
+      id: 3,
+      title: 'New Television',
+      amount: 294.67,
+      date: new Date(2021, 2, 28),
+    }
+  ]
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/memo" element={<LectureHistory />} />
+          <Route path="/" element={<ExpenseItem expense={expense} />}></Route>
+        </Routes>
+      </div>
+    </Router>
+  )
 }
 
-export default App;
+export default App
