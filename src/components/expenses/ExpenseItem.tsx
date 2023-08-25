@@ -5,21 +5,21 @@ import React, { useState } from 'react'
 import ExpenseDate from './ExpenseDate'
 import Card from '../ui/Card'
 
-interface ExpenseItemProps {
-  expense: {
-    id: string
-    title: string
-    amount: number
-    date: Date
-  }
-}
+import { IChildExpenseItemProps } from '../../models/interfaces/expenses/i.child.expense'
 
-function ExpenseItem({ ...props }: ExpenseItemProps) {
-
-  let [title, newTitle] = useState(props['expense']['title']);
+function ExpenseItem({ ...props }: IChildExpenseItemProps) {
+  const [title, newTitle] = useState(props['expense']['title'])
 
   const expenseClickHandler = () => {
-    newTitle('Update');
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    let randomText = ''
+
+    for (let i = 0; i < 5; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length)
+      randomText += characters.charAt(randomIndex)
+    }
+
+    newTitle(randomText)
   }
 
   return (

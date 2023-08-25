@@ -1,9 +1,46 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
-import Expenses from './components/expenses/Expenses'
+import Expenses from './components/Expenses/Expenses'
 import PracMain from './components/prac1/PracMain'
+import NewExpense from './components/NewExpenses/NewExpense'
+import { IParentNewExpenseData } from './models/interfaces/newExpenses/i.parent.new.expense'
+import { useState } from 'react'
 
-const expense = [
+function App() {
+  const [expense, setExpenses] =useState(Dummy);
+
+  const addExpenseHandler = (newExpense : IParentNewExpenseData) => {
+    const {id, data} = newExpense
+    setExpenses([{
+      id,
+      title : data['title'],
+      amount : data['amount'],
+      date : new Date(data['date']) }])
+    
+  }
+  return (
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route
+            path="/expense"
+            element={
+              <>
+                <NewExpense addNewExpense={addExpenseHandler}/>
+                <Expenses expense={expense} />
+              </>
+            }
+          ></Route>
+          <Route path="/prac" element={<PracMain></PracMain>}></Route>
+        </Routes>
+      </div>
+    </Router>
+  )
+}
+
+export default App
+
+const Dummy = [
   {
     id: 'e1',
     title: 'Toilet Paper',
@@ -24,18 +61,3 @@ const expense = [
     date: new Date(2021, 5, 12),
   },
 ]
-
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/expense" element={<Expenses expense={expense} />}></Route>
-          <Route path='/prac' element={<PracMain></PracMain>}></Route>
-        </Routes>
-      </div>
-    </Router>
-  )
-}
-
-export default App

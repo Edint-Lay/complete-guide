@@ -1,10 +1,8 @@
 import './ExpenseDate.css'
 
-interface ExpenseDateProps {
-  date: Date
-}
+import { IChildExpenseDateProps } from '../../models/interfaces/expenses/i.child.expense';
 
-function ExpenseDate(props : ExpenseDateProps) {
+function ExpenseDate(props : IChildExpenseDateProps) {
   const month = props.date.toLocaleString('en-US', { month: 'long' });
   const day = props.date.toLocaleString('en-US', { day: '2-digit' });
   const year = props.date.getFullYear();
