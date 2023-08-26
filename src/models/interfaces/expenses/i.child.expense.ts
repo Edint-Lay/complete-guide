@@ -5,10 +5,6 @@ export interface IExpense {
     date: Date
 }
 
-export interface IChildExpenseProps {
-    expense: IExpense[]
-}
-
 export interface IChildExpenseItemProps {
     expense: {
         id: string

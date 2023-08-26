@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { styled } from 'styled-components'
 import {
   IChildNewExpenseProps,
@@ -16,19 +16,21 @@ const NewExpenseForm = (props: IChildNewExpenseProps) => {
   const titleChangeHandler = (event: TInputEvent) => {
     const titleValue = event['target']['value']
     setInputValue((preState) => {
-      return { ...preState, originTitle: titleValue }
+      console.log(preState);
+      
+      return { ...preState, title: titleValue }
     })
   }
   const amountChangeHandler = (event: TInputEvent) => {
-    const amountValue = event['target']['value']
+    const amountValue = +event['target']['value']
     setInputValue((preState) => {
-      return { ...preState, originAmount: amountValue }
+      return { ...preState, amount: amountValue }
     })
   }
   const dateChangeHandler = (event: TInputEvent) => {
     const dateValue = event['target']['value']
     setInputValue((preState) => {
-      return { ...preState, originDate: dateValue }
+      return { ...preState, date: dateValue }
     })
   }
 
@@ -64,6 +66,7 @@ const NewExpenseForm = (props: IChildNewExpenseProps) => {
             type="text"
             value={userInput.title}
             onChange={titleChangeHandler}
+            placeholder='title'
           />
         </div>
         <div>
@@ -74,6 +77,7 @@ const NewExpenseForm = (props: IChildNewExpenseProps) => {
             step="0.01"
             value={userInput.amount}
             onChange={amountChangeHandler}
+            placeholder='0'
           />
         </div>
         <div>
